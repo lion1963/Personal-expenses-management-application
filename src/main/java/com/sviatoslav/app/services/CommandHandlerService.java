@@ -5,8 +5,9 @@ import com.sviatoslav.app.repositories.ExpensesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
+import org.springframework.shell.standard.commands.Clear;
+import org.springframework.shell.standard.commands.Quit;
 
-import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 import javax.validation.constraints.Pattern;
 import java.text.ParseException;

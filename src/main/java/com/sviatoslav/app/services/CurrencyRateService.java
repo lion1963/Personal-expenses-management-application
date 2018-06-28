@@ -61,9 +61,9 @@ public class CurrencyRateService {
     public double convertCurrency(List<Expenses> expenses, String currency){
         double sum = 0;
         for (Expenses e : expenses){
-            sum+= e.getPrice()/currencyRates.get(e.getCurrency());
+            sum+= e.getPrice()/getCurrencyRates().get(e.getCurrency());
         }
-        return  sum*currencyRates.get(currency);
+        return  sum * getCurrencyRates().get(currency);
     }
 
     @Scheduled(fixedDelay = 3600000) // delay = 1 hour
