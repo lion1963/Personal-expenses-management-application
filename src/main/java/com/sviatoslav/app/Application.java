@@ -13,6 +13,4 @@ public class Application  {
         String[] fullArgs = StringUtils.concatenateStringArrays(args, disabledCommands);
         SpringApplication.run(Application.class, fullArgs);
     }
-
-
 }
