@@ -63,7 +63,9 @@ public class MessageFormerServiceImpl implements MessageFormerService {
     public String total(String currency){
         StringBuilder stringBuilder = new StringBuilder();
         if (currencyRateServiceImpl.containsKey(currency)){
-            stringBuilder.append(currencyRateServiceImpl.convertCurrency(expensesRepository.findAllByOrderByDateAsc(), currency)).append(" ").append(currency);
+            double total = currencyRateServiceImpl.convertCurrency(expensesRepository.findAllByOrderByDateAsc(), currency);
+            String formattedTotal = String.format("%.2f", total);
+            stringBuilder.append(formattedTotal).append(" ").append(currency);
         }else{
             stringBuilder.append("Incorrect currency!");
         }

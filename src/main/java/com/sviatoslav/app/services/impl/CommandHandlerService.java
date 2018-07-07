@@ -17,6 +17,9 @@ public class CommandHandlerService {
     @Autowired
     private MessageFormerServiceImpl messageFormerServiceImpl;
 
+    private final String dateErrorMessage = "Date should fit pattern: YYYY-MM-DD, where YYYY - year, MM - month and DD - day";
+    private final String currencyErrorMessage = "Currency should fit pattern - XXX, where XXX - uppercase abbreviation of currency";
+
     @ShellMethod("Display list of all expenses.")
     public void list(){
 
@@ -24,23 +27,23 @@ public class CommandHandlerService {
     }
 
     @ShellMethod("Add expense to the list.")
-    public void add(@Pattern(regexp = "[12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])") String date,
+    public void add(@Pattern(regexp = "[12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])", message = dateErrorMessage) String date,
                     double price,
-                    @Pattern(regexp = "[A-Z]{3}") String currency,
+                    @Pattern(regexp = "[A-Z]{3}", message = currencyErrorMessage) String currency,
                     String product){
 
         printerService.print(messageFormerServiceImpl.add(date, price, currency, product));
     }
 
     @ShellMethod("Show total amount of spent money in specified currency.")
-    public void total(@Pattern(regexp = "[A-Z]{3}") String currency){
+    public void total(@Pattern(regexp = "[A-Z]{3}", message = currencyErrorMessage) String currency){
 
         printerService.print(messageFormerServiceImpl.total(currency));
     }
 
     @ShellMethod("Remove all expenses for specified date.")
     @Transactional
-    public void clear(@Pattern(regexp = "[12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])") String date)  {
+    public void clear(@Pattern(regexp = "[12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])", message = dateErrorMessage) String date)  {
 
         printerService.print(messageFormerServiceImpl.clear(date));
     }
